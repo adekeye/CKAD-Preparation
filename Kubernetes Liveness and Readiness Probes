@@ -1,0 +1,10 @@
+Kubernetes uses liveness probes to know when to restart a container. If a container is unresponsive—perhaps the application is deadlocked due to a multi-threading defect—restarting the container can make the application more available, despite the defect. It certainly beats paging someone in the middle of the night to restart a container.[1]
+
+Kubernetes uses readiness probes to decide when the container is available for accepting traffic. The readiness probe is used to control which pods are used as the backends for a service. A pod is considered ready when all of its containers are ready. 
+
+ Kubernetes supports three mechanisms for implementing liveness and readiness probes: 1) running a command inside a container, 2) making an HTTP request against a container, or 3) opening a TCP socket against a container.
+
+A probe has a number of configuration parameters to control its behaviour e.g how often to execute the probe; how long to wait after starting the container to initiate the probe; the number of seconds after which the probe is considered failed; and how many times the probe can fail before giving up. For a liveness probe, giving up means the pod will be restarted. For a readiness probe, giving up means not routing traffic to the pod, but the pod is not restarted. Liveness and readiness probes can be used in conjunction.
+
+
+Reference:https://blog.colinbreck.com/kubernetes-liveness-and-readiness-probes-how-to-avoid-shooting-yourself-in-the-foot/
